@@ -1,7 +1,7 @@
 export const url = "https://lixril.vercel.app"
 export const siteicon = "/icon.png"
 
-export const gtm = "GTM-XXXXXXX"
+export const gtm = "GTM-NJSRHLXB"
 export const gtmconnected = true
 
 export const sitename = "Lixril"
