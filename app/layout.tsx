@@ -9,10 +9,7 @@ import { Navbar } from "@/components/navigation/navbar"
 
 import "@/styles/globals.css"
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-})
+
 
 const baseUrl = Settings.metadataBase
 
@@ -56,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       {Settings.gtmconnected && <GoogleTagManager gtmId={Settings.gtm} />}
-      <body className={`${inter.variable} font-regular`}>
+      <body>
         <Providers>
           <Navbar />
           <main className="h-auto px-5 sm:px-8">{children}</main>
