@@ -1,25 +1,25 @@
-export const url = "https://rubix-documents.vercel.app"
+export const url = "https://lixril.vercel.app"
 export const siteicon = "/icon.png"
 
 export const gtm = "GTM-XXXXXXX"
 export const gtmconnected = true
 
-export const sitename = "Documents"
+export const sitename = "Lixril"
 export const description =
-  "This comprehensive documentation template, crafted with Next.js and available as open-source, delivers a sleek and responsive design, tailored to meet all your project documentation requirements."
+  "This comprehensive documentation for Lixril resources, crafted with Next.js and available as open-source, delivers a sleek and responsive design, tailored to meet all your project documentation requirements."
 export const keywords = [
   "Next.js",
   "documentation",
-  "Rubix Studios",
+  "Lixril",
   "open source",
   "SEO",
 ]
 export const urlimage = "/images/og-image.png"
-export const imagealt = "Rubix Studios Documentation"
-export const twitterhandle = "@RubixStudios"
+export const imagealt = "Lixril Documentation"
+export const twitterhandle = ""
 
-export const companyname = "Rubix Studios"
-export const companylink = "https://rubixstudios.com.au"
+export const companyname = "Lixril"
+export const companylink = "https://lixril.vercel.app"
 
 export const branding = true
 export const rightsidebar = true
