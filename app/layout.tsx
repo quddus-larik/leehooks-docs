@@ -53,8 +53,6 @@ export default function RootLayout({
     <html lang="en">
       {Settings.gtmconnected && <GoogleTagManager gtmId={Settings.gtm} />}
       <body>
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJSRHLXB"
-          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <Providers>
           <Navbar />
           <main className="h-auto px-5 sm:px-8">{children}</main>
