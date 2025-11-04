@@ -1,0 +1,189 @@
+---
+title: useWindowSize
+description: The `useWindowSize` hook provides a simple and efficient way to track the current browser window dimensions in React functional components. It automatically updates whenever the window is resized, making it perfect for responsive layouts and conditional rendering based on screen size.
+keywords: ["leehooks", "guide", "nextjs", "docs", "reactjs","npm","useWindowSize"]
+---
+
+## Hook Signature
+
+```javascript
+/**
+ * @returns {object} An object containing the current window width and height.
+ */
+function useWindowSize(): WindowSize
+```
+
+-----
+
+## Return Object (WindowSize)
+
+The hook returns an object containing the current window dimensions.
+
+| Property | Type | Description |
+| :--- | :--- | :--- |
+| `width` | `number` | The current width of the browser window in pixels. |
+| `height` | `number` | The current height of the browser window in pixels. |
+
+-----
+
+## Code Usage 
+
+This section demonstrates how to use the `useWindowSize` hook in a React component to create responsive behavior.
+
+### 1. Example Without useWindowSize
+
+This approach requires manual state management and event listener setup/cleanup.
+
+```javascript
+import React, { useState, useEffect } from 'react';
+
+function TraditionalWindowTracker() {
+  const [windowSize, setWindowSize] = useState({
+    width: 0,
+    height: 0
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    }
+    
+    // Set initial size
+    handleResize();
+    
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return (
+    <div>
+      <h3>1. Traditional Window Tracker (High-Code)</h3>
+      <p>Width: {windowSize.width}px</p>
+      <p>Height: {windowSize.height}px</p>
+      <p>
+        Screen Size: {windowSize.width < 768 ? 'Mobile' : 'Desktop'}
+      </p>
+    </div>
+  );
+}
+```
+
+-----
+
+### 2. Example With useWindowSize
+
+This approach uses the `useWindowSize` hook for a cleaner, more maintainable solution.
+
+```javascript
+import React from 'react';
+// import { useWindowSize } from 'leehooks'; // Assume hook import
+
+function HookWindowTracker() {
+  const { width, height } = useWindowSize();
+
+  return (
+    <div>
+      <h3>2. Hook Window Tracker (Low-Code)</h3>
+      <p>Width: {width}px</p>
+      <p>Height: {height}px</p>
+      <p>
+        Screen Size: {width < 768 ? 'Mobile' : 'Desktop'}
+      </p>
+    </div>
+  );
+}
+```
+
+-----
+
+### 3. Responsive Component Example
+
+Here's a practical example showing how to use `useWindowSize` for responsive rendering:
+
+```javascript
+import React from 'react';
+// import { useWindowSize } from 'leehooks';
+
+function ResponsiveLayout() {
+  const { width } = useWindowSize();
+
+  // Define breakpoints
+  const isMobile = width < 768;
+  const isTablet = width >= 768 && width < 1024;
+  const isDesktop = width >= 1024;
+
+  return (
+    <div>
+      <h3>Responsive Layout</h3>
+      
+      {isMobile && (
+        <div>
+          <h4>Mobile View</h4>
+          <p>Showing mobile-optimized content</p>
+        </div>
+      )}
+      
+      {isTablet && (
+        <div>
+          <h4>Tablet View</h4>
+          <p>Showing tablet-optimized content</p>
+        </div>
+      )}
+      
+      {isDesktop && (
+        <div>
+          <h4>Desktop View</h4>
+          <p>Showing desktop-optimized content</p>
+        </div>
+      )}
+      
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+        gap: '1rem'
+      }}>
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </div>
+    </div>
+  );
+}
+```
+
+-----
+
+## Hook Implementation
+
+```javascript
+import { useState, useEffect } from 'react';
+
+export function useWindowSize() {
+  const [windowSize, setWindowSize] = useState({
+    width: 0,
+    height: 0
+  });
+  
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    }
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
+  return windowSize;
+}
+```
