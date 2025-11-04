@@ -23,6 +23,10 @@ export const Documents: Paths[] = [
       {
         title: "useActionState",
         href: "/use-action-state"
+      },
+      {
+        title: "useWindowSize",
+        href: "/use-window-size"
       }
     ]
   }
