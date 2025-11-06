@@ -21,8 +21,8 @@ export const Documents: Paths[] = [
     href: "/hooks",
     items: [
       {
-        title: "useActionState",
-        href: "/use-action-state"
+        title: "useAsyncState",
+        href: "/use-async-state"
       },
       {
         title: "useWindowSize",
