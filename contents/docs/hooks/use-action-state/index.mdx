@@ -1,7 +1,7 @@
 ---
-title: useActionState
-description: The `useActionState` hook provides a robust and scalable solution for managing the asynchronous lifecycle of actions (API calls, complex calculations, etc.) within React functional components. By utilizing `useReducer` and a clear state machine, it encapsulates loading, success, and error handling into a reusable and declarative API.
-keywords: ["leehooks", "guide", "nextjs", "docs", "reactjs","npm","useActionState"]
+title: useAsyncState
+description: The `useAsyncState` hook provides a robust and scalable solution for managing the asynchronous lifecycle of actions (API calls, complex calculations, etc.) within React functional components. By utilizing `useReducer` and a clear state machine, it encapsulates loading, success, and error handling into a reusable and declarative API.
+keywords: ["leehooks", "guide", "nextjs", "docs", "reactjs","npm","useAsyncState"]
 ---
 
 ### Hook Signature
@@ -11,7 +11,7 @@ keywords: ["leehooks", "guide", "nextjs", "docs", "reactjs","npm","useActionStat
  * @param {string} initialStatus - Optional initial status for the action. Defaults to "idle".
  * @returns {object} The action state API.
  */
-function useActionState(initialStatus: Status = 'idle'): ActionStateAPI
+function useAsyncState(initialStatus: Status = 'idle'): ActionStateAPI
 ```
 
 | Parameter | Type | Default | Description |
@@ -48,7 +48,7 @@ The hook provides a **Unified Renderer** for a low-code approach, along with **G
 
 | Component | Usage Pattern | Description |
 | :--- | :--- | :--- |
-| `ActionStateRenderer` | **Unified, Low-Code** | A single component that accepts `idle`, `pending`, `success`, and `error` props to map the entire state flow declaratively. |
+| `Renderer` | **Unified, Low-Code** | A single component that accepts `idle`, `pending`, `success`, and `error` props to map the entire state flow declaratively. |
 | `RenderPending` | Granular | Renders children only when `isPending` is `true`. |
 | `RenderSuccess` | Granular | Renders children only on `isSuccess`. Supports a function-as-child pattern to pass `data`. |
 | `RenderError` | Granular | Renders children only on `isError`. Supports a function-as-child pattern to pass `error`. |
@@ -59,7 +59,7 @@ The hook provides a **Unified Renderer** for a low-code approach, along with **G
 
 This section demonstrates a React component that fetches user data from JSONPlaceholder.
 
-### 1. Example Without useActionState
+### 1. Example Without useAsyncState
 
 This approach requires manual management of three separate state variables and explicit conditional logic in the JSX.
 
@@ -124,24 +124,24 @@ function TraditionalFetcher({ userId = 1 }) {
 
 -----
 
-### 2. Example With useActionState
+### 2. Example With useAsyncState
 
-This approach uses the unified `ActionStateRenderer` for a declarative, low-code component structure. All state management and conditional rendering logic are delegated to the hook.
+This approach uses the unified `Renderer` for a declarative, low-code component structure. All state management and conditional rendering logic are delegated to the hook.
 
 ```javascript
 import React from 'react';
-// import { useActionState } from './useActionState'; // Assume hook import
+// import { useAsyncState } from './useAsyncState'; // Assume hook import
 
-// NOTE: useActionState and fetchUser are assumed to be available.
+// NOTE: useAsyncState and fetchUser are assumed to be available.
 
 function HookFetcher({ userId = 1 }) {
   // 1. Destructure the action functions and the unified renderer
   const { 
     startAction, 
     reset, 
-    ActionStateRenderer,
+    Renderer,
     status 
-  } = useActionState();
+  } = useAsyncState();
 
   const handleFetch = () => startAction(() => fetchUser(userId));
 
@@ -154,7 +154,7 @@ function HookFetcher({ userId = 1 }) {
       <button onClick={reset}>Reset</button>
       
       {/* Declarative, Low-Code Rendering */}
-      <ActionStateRenderer
+      <Renderer
         idle={<p>Click to fetch user data.</p>}
         
         pending={
